@@ -1,3 +1,9 @@
+/* =========================================================
+   SALA TRUONG — WEBSITE STYLES
+   Shared styles, Notes, Create / Edit Note, and Note Details
+   ========================================================= */
+
+/* Fonts */
 @font-face {
     font-family: 'MervaleScript';
     src: url('fonts/MervaleScript-Regular.ttf') format('truetype');
@@ -40,16 +46,29 @@
     font-style: normal;
 }
 
+/* Shared sizing and responsive spacing */
+:root {
+    --page-gutter: clamp(12px, 3vw, 48px);
+    --content-width: 1250px;
+    --accent: #9E0A0A;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { max-width: 100%; }
+body { margin: 0; min-width: 0; max-width: 100%; overflow-x: clip; }
+img, svg { max-width: 100%; }
+
+/* Shared header and navigation */
 .title {
     font-family: 'MervaleScript', sans-serif;
-    font-size: 96px;
+    font-size: clamp(40px, 7vw, 96px);
     text-align: center;
     margin-bottom: 0;
 }
 
 .subtitle {
     font-family: 'RozhaOne', sans-serif;
-    font-size: 36px;
+    font-size: clamp(20px, 3vw, 36px);
     text-align: center;
     margin-top: 0;
 }
@@ -57,18 +76,18 @@
 table {
     border-collapse: collapse;
     border-spacing: 0;
+    width: 100%;
+    table-layout: fixed;
     margin: 0;
 }
 
 td {
     border: 2px solid black;
-    padding: 10px;
+    padding: clamp(6px, 1vw, 10px);
+    overflow-wrap: anywhere;
 }
 
-.table2 tr:first-child td {
-    border-top: none;
-}
-
+.table2 tr:first-child td,
 .table3 tr:first-child td {
     border-top: none;
 }
@@ -83,82 +102,141 @@ td {
 
 .linkedPage {
     font-family: 'Katibeth', sans-serif;
-    font-size: 40px;
+    font-size: clamp(15px, 2.5vw, 40px);
     text-align: center;
-    padding-top: 25px;
+    padding-top: clamp(8px, 2vw, 25px);
 }
 
 .linked {
     font-family: 'Karantina', sans-serif;
-    font-size: 40px;
+    font-size: clamp(18px, 3vw, 40px);
     text-align: center;
 }
 
+/* Home page */
 .greeting1 {
     font-family: 'Notable', sans-serif;
-    font-size: 44px;
+    font-size: clamp(24px, 3.6vw, 44px);
     text-align: left;
     max-width: 650px;
-    padding-left: 100px;
-    margin-top: 0px;
+    padding-left: clamp(0px, 5vw, 100px);
+    margin-top: 0;
 }
 
 .greeting2 {
     font-family: 'Lancelot', sans-serif;
-    font-size: 40px;
+    font-size: clamp(23px, 3.3vw, 40px);
     max-width: 650px;
     text-align: left;
-    padding-left: 100px;
+    padding-left: clamp(0px, 5vw, 100px);
 }
 
 .home-image {
-    width: 400px;
-    height: 600px;
-    transform: translateY(-100px);
+    width: min(100%, 400px);
+    height: auto;
+    max-height: 600px;
+    object-fit: contain;
+    transform: translateY(-30px);
 }
 
-/* Note Page */
+/* =========================================================
+   NOTES PAGE — HEADER, SEARCH AND ACTIONS
+   ========================================================= */
+.notesHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(10px, 1.5vw, 20px);
+    width: 100%;
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(18px, 2.5vw, 30px) var(--page-gutter);
+    box-sizing: border-box;
+}
+
 .noteTitle {
+    flex-shrink: 0;
+    margin: 0;
     font-family: 'RozhaOne', sans-serif;
-    font-size: 64px;
+    font-size: clamp(27px, 3vw, 38px);
     text-align: center;
     white-space: nowrap;
-    margin-left: 100px;
 }
 
 .searchBox {
     position: relative;
-    width: 450px;
-    height: 70px;
-    flex-shrink: 0;
-    margin-right: 0;
-    transform: translateX(-50px)
+    flex: 1;
+    width: auto;
+    min-width: 140px;
+    max-width: 380px;
+    height: clamp(48px, 5vw, 70px);
+    margin: 0;
+}
+
+#site-search {
+    width: 100%;
+    height: 100%;
+    padding: 10px 55px 10px 15px;
+    border: 1px solid #000;
+    border-radius: 20px;
+    background: transparent;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#site-search:focus-visible {
+    border-color: #9E0A0A;
+    outline: 2px solid #9E0A0A;
+    outline-offset: 2px;
+}
+
+#site-search::placeholder {
+    font-family: 'Katibeth', sans-serif;
+    font-size: clamp(22px, 2.5vw, 34px);
+    color: #888;
+}
+
+.searchBox button {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.searchIcon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }
 
 .newNoteBox {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: 250px;
-    height: 70px;
-
+    flex-shrink: 0;
+    width: clamp(135px, 17vw, 250px);
+    height: clamp(48px, 5vw, 70px);
+    margin: 0;
     border: 2px solid black;
     border-radius: 15px;
     background-color: white;
-
+    box-sizing: border-box;
     text-decoration: none;
     color: black;
-    box-sizing: border-box;
-
-    transform: translateX(-100px)
+    white-space: nowrap;
 }
 
 .newNotes {
     font-family: 'Katibeth', sans-serif;
-    font-size: 40px;
+    font-size: clamp(23px, 3vw, 40px);
     text-align: center;
-    transform: translateY(10px)
+    line-height: 1;
 }
 
 .newNoteBox:hover {
@@ -169,63 +247,162 @@ td {
     background-color: #aca9a9;
 }
 
-#site-search {
-    width: 100%;
-    height: 70px;
-    padding: 10px 45px 10px 15px;
-
-    border: 1px solid #000000;
-    border-radius: 20px;
-    background: transparent;
-
-    font-size: 16px;
-    outline: none;
-}
-
-.searchBox button {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.searchIcon {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    display: block;
-    transform: translateX(-10px);
-}
-
-#site-search::placeholder {
-    font-family: 'Katibeth', sans-serif;
-    font-size: 40px;
-    color: #888;
-    transform: translateY(5px);
-}
-
-.notesHeader {
+/* Expandable filter toggle and panel */
+.filterToolbar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    gap: 20px;
-    width: 100%;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0;
 }
 
-.notesBox {
-    min-height: 200px;
-    padding: 20px;
-    margin-top: 25px;
+.filterToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 55px;
+    padding: 0 20px;
     border: 2px solid #333;
     border-radius: 15px;
     background-color: white;
+    color: #333;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
 
+.filterToggle svg {
+    width: 22px;
+    height: 22px;
+}
+
+.filterToggle:hover,
+.filterToggle[aria-expanded='true'] {
+    background-color: #9E0A0A;
+    border-color: #9E0A0A;
+    color: white;
+}
+
+.notesFilters {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center;
+    width: fit-content;
+    max-width: calc(100% - 2 * var(--page-gutter));
+    margin: 0 auto 30px;
+    padding: 20px 24px;
+    border: 2px solid #333;
+    border-radius: 22px;
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+}
+
+.notesFilters[hidden] {
+    display: none;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 220px;
+    max-width: 300px;
+    gap: 8px;
+}
+
+.filterGroup label {
+    margin-left: 6px;
+    color: #333;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.filterGroup select {
+    width: 100%;
+    min-width: 0;
+    height: 52px;
+    padding: 0 18px;
+    border: 2px solid #333;
+    border-radius: 16px;
+    background-color: white;
+    color: #333;
+    font-family: Georgia, serif;
+    font-size: 17px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filterGroup select:hover {
+    border-color: #9E0A0A;
+}
+
+.filterGroup select:focus-visible {
+    border-color: #9E0A0A;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(158, 10, 10, 0.12);
+}
+
+.clearFilters {
+    height: 52px;
+    padding: 0 24px;
+    border: 2px solid #9E0A0A;
+    border-radius: 16px;
+    background-color: white;
+    color: #9E0A0A;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.clearFilters:hover {
+    background-color: #9E0A0A;
+    color: white;
+}
+
+/* =========================================================
+   FEATURED NOTES — CARDS AND CAROUSEL
+   ========================================================= */
+.featuredNotes {
+    display: grid;
+    grid-template-columns: 45px minmax(0, 1fr) 45px;
+    align-items: center;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 25px 0;
+}
+
+.notesCards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 2vw, 25px);
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.notesBox {
+    min-width: 0;
+    min-height: 200px;
+    padding: clamp(12px, 1.8vw, 20px);
+    margin-top: 0;
+    border: 2px solid #333;
+    border-radius: 15px;
+    background-color: white;
     box-sizing: border-box;
 }
 
@@ -236,131 +413,107 @@ td {
     width: 100%;
 }
 
-.number {
+.number,
+.date {
     font-family: 'Katibeth', sans-serif;
-    font-size: 36px;
+    font-size: clamp(20px, 2.5vw, 36px);
     color: #A6A6A6;
+}
+
+.number {
     white-space: nowrap;
 }
 
-.date {
-    font-family: 'Katibeth', sans-serif;
-    font-size: 36px;
-    color: #A6A6A6;
-    position: relative;
-}
-
 .cardTitle {
-    font-family: 'RozhaOne', sans-serif;
-    font-size: 44px;
+    display: block;
+    margin: 0;
     color: black;
-    margin: 100px;
+    font-family: 'RozhaOne', sans-serif;
+    font-size: clamp(26px, 3vw, 44px);
+    overflow-wrap: anywhere;
 }
 
 .cardSubTitle {
-    font-family: 'Katibeth', sans-serif;
-    font-size: 40px;
+    display: block;
+    margin-top: 15px;
     color: black;
+    font-family: 'Katibeth', sans-serif;
+    font-size: clamp(27px, 2.8vw, 40px);
 }
 
 .description {
+    color: black;
     font-family: 'Lancelot', sans-serif;
     font-size: 24px;
-    color: black;
-    max-width: 100px;
+}
+
+.notesBox .description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    margin: 5px 0 10px;
 }
 
 .more {
+    display: block;
+    width: fit-content;
+    margin: 12px 0 0 auto;
+    color: black;
     font-family: 'Katibeth', sans-serif;
     font-size: 32px;
-    color: black;
     text-align: right;
-    margin-left: 240px;
 }
 
-.notesCards {
+.cardTags {
     display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    gap: 30px;
-
-    margin: 25px 100px;
-    width: calc(100% - 200px);
-    box-sizing: border-box;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 15px;
 }
 
 .tag {
-    min-width: 70px;
-    height: 30px;
-    padding: 0 15px;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
+    min-width: 70px;
+    min-height: 30px;
+    padding: 0 15px;
     border: 2px solid #333;
     border-radius: 15px;
     background-color: white;
-
     box-sizing: border-box;
 }
 
-/* Featured notes carousel */
-
-.featuredNotes {
-    display: grid;
-    grid-template-columns: 45px minmax(0, 1fr) 45px;
-    align-items: center;
-    gap: 0;
-
-    width: 100%;
-    padding: 25px 0;
+.emptyNotes {
+    grid-column: 1 / -1;
+    padding: 70px 20px;
+    text-align: center;
 }
-
-.featuredNotes .notesCards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 25px;
-
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: 0 15px;
-    box-sizing: border-box;
-}
-
-.featuredNotes .notesBox {
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-}
-
-/* Navigation arrows */
 
 .carouselArrow {
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 45px;
     height: 65px;
-
-    background-color: white;
     border: 2px solid #333;
-    cursor: pointer;
-
-    font-size: 22px;
+    background-color: white;
     color: #333;
+    font-size: 22px;
+    cursor: pointer;
 }
 
 .prevArrow {
-    border-radius: 0 50% 50% 0;
     border-left: none;
+    border-radius: 0 50% 50% 0;
 }
 
 .nextArrow {
-    border-radius: 50% 0 0 50%;
     border-right: none;
+    border-radius: 50% 0 0 50%;
 }
 
 .carouselArrow:hover:not(:disabled) {
@@ -373,53 +526,12 @@ td {
     cursor: default;
 }
 
-/* Note card content */
-
-.featuredNotes .cardTitle {
-    display: block;
-    overflow-wrap: anywhere;
-}
-
-.featuredNotes .cardSubTitle {
-    display: block;
-    margin-top: 15px;
-}
-
-.featuredNotes .description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    overflow: hidden;
-    overflow-wrap: anywhere;
-    margin: 5px 0 10px;
-}
-
-.cardTags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 15px;
-}
-
-.emptyNotes {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 70px 20px;
-}
-
-/* Smaller screens */
-
-@media (max-width: 850px) {
-    .featuredNotes .notesCards {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* New note */
+/* =========================================================
+   CREATE / EDIT NOTE FORM
+   ========================================================= */
 .newNoteTitle {
     font-family: 'RozhaOne', sans-serif;
-    font-size: 64px;
+    font-size: clamp(36px, 5vw, 64px);
     text-align: center;
 }
 
@@ -432,31 +544,42 @@ td {
 }
 
 .introduction {
+    color: #888;
     font-family: 'Lancelot', sans-serif;
     font-size: 40px;
     text-align: center;
-    color: #888;
+    transform: translateY(-50px);
+}
+
+.optionBox,
+.contentBox {
+    width: min(100% - 2 * var(--page-gutter), var(--content-width));
+    margin: 20px auto;
+    border: 2px solid #333;
+    border-radius: 15px;
+    background-color: white;
+    box-sizing: border-box;
     transform: translateY(-50px);
 }
 
 .optionBox {
-    width: 85%;
-    height: 150px;
-
-    border: 2px solid #333;
-    border-radius: 15px;
-    background-color: white;
-
-    box-sizing: border-box;
-    margin: 20px auto;
-    transform: translateY(-50px);
+    min-height: 150px;
 }
 
-.optionBox .title {
+.contentBox {
+    min-height: 300px;
+}
+
+.optionBox .title,
+.contentBox .title,
+.dateBox .title {
+    margin-left: 20px;
     font-family: 'RozhaOne', sans-serif;
     font-size: 34px;
     text-align: left;
-    margin-left: 20px;
+}
+
+.optionBox .title {
     transform: translateY(-10px);
 }
 
@@ -464,34 +587,34 @@ td {
     color: #9E0A0A;
 }
 
-.example {
+.example,
+.content {
     display: block;
-    width: 97%;
-    height: 50px;
+    width: calc(100% - 40px);
     margin-left: 20px;
-    font-family: 'Lancelot', sans-serif;
-    font-size: 24px;
-    text-align: left;
-    padding-top: 10px;
-    padding-left: 10px;
+    padding: 10px;
     border: 2px solid #333;
     border-radius: 15px;
     box-sizing: border-box;
+    font-family: 'Lancelot', sans-serif;
+    font-size: 24px;
+    text-align: left;
     resize: none;
 }
 
-.dateBox .title {
-    font-family: 'RozhaOne', sans-serif;
-    font-size: 34px;
-    text-align: left;
-    margin-left: 20px;
+.example {
+    height: 50px;
+}
+
+.content {
+    height: 150px;
+    transform: translateY(-20px);
 }
 
 .dateCate {
     display: flex;
     gap: 20px;
-    width: 1250px;
-    max-width: 100%;
+    width: min(100% - 2 * var(--page-gutter), var(--content-width));
     margin: 0 auto;
     transform: translateY(-40px);
 }
@@ -499,221 +622,145 @@ td {
 .dateBox {
     flex: 1;
     min-width: 0;
-    height: 150px;
-
+    min-height: 150px;
     border: 2px solid #333;
     border-radius: 15px;
     background-color: white;
-
     box-sizing: border-box;
 }
 
-.dateInput {
-    width: 90%;
+.dateInput,
+.categoryInput {
+    width: calc(100% - 40px);
     height: 50px;
-
+    margin-left: 20px;
     padding: 10px 15px;
-
-    font-family: 'Lancelot', sans-serif;
-    font-size: 24px;
-    color: #333;
-
-    background-color: #FAF8F5;
     border: 1px solid #A6A6A6;
     border-radius: 10px;
-
+    background-color: #FAF8F5;
+    color: #333;
     box-sizing: border-box;
-    outline: none;
+    font-family: 'Lancelot', sans-serif;
+    font-size: 24px;
     cursor: pointer;
-
-    transform: translateX(20px);
 }
 
-.dateInput:hover {
+.dateInput:hover,
+.categoryInput:hover {
     border-color: #9E0A0A;
 }
 
-.dateInput:focus {
+.dateInput:focus,
+.categoryInput:focus {
     border: 2px solid #9E0A0A;
+    outline: none;
     background-color: white;
 }
 
 .dateInput::-webkit-calendar-picker-indicator {
     width: 20px;
     height: 20px;
-    cursor: pointer;
     opacity: 0.7;
+    cursor: pointer;
 }
 
 .dateInput::-webkit-calendar-picker-indicator:hover {
     opacity: 1;
 }
 
-.categoryInput {
-    width: 90%;
-    height: 50px;
-    padding: 10px 15px;
-
-    font-family: 'Lancelot', sans-serif;
-    font-size: 24px;
-    color: #333;
-
-    background-color: #FAF8F5;
-    border: 1px solid #A6A6A6;
-    border-radius: 10px;
-
-    box-sizing: border-box;
-    cursor: pointer;
-
-    transform: translateX(20px);
-}
-
 .line {
-    width: 85%;
+    width: min(100% - 2 * var(--page-gutter), var(--content-width));
     height: 0;
+    padding-bottom: 20px;
     border: none;
     border-top: 3px solid #9E0A0A;
     transform: translateY(-40px);
-    padding-bottom: 20px;
 }
 
-/* Container for all three options */
+/* Note type radio cards */
 .noteTypeOptions {
     display: flex;
     gap: 20px;
     width: 100%;
+    padding: 0 20px 16px;
 }
 
-/* Individual option card */
 .noteTypeCard {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-
-    width: 375px;
+    flex: 1 1 0;
+    width: auto;
     min-width: 0;
     min-height: 70px;
+    margin-left: 0;
     padding: 10px 15px;
-
     border: 2px solid #333;
     border-radius: 15px;
     background-color: white;
-
     box-sizing: border-box;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
     transform: translateY(-10px);
-    margin-left: 20px;
 }
 
-/* Hide the original radio button visually */
 .noteTypeCard input {
     position: absolute;
-    opacity: 0;
     width: 1px;
     height: 1px;
+    opacity: 0;
 }
 
-/* Custom radio circle */
 .radioCircle {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-
-    border: 2px solid #333;
-    border-radius: 50%;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 50%;
     box-sizing: border-box;
 }
 
-/* Text */
 .noteTypeText {
+    color: #333;
     font-family: 'Katibeth', sans-serif;
     font-size: 30px;
-    color: #333;
     transform: translateY(5px);
 }
 
-/* Hover effect */
 .noteTypeCard:hover {
     border-color: #9E0A0A;
     background-color: #FFF8F8;
 }
 
-/* Selected card */
 .noteTypeCard:has(input:checked) {
     border-color: #9E0A0A;
     background-color: #FFF0F0;
 }
 
-/* Selected radio circle */
-.noteTypeCard input:checked+.radioCircle {
+.noteTypeCard input:checked + .radioCircle {
     border-color: #9E0A0A;
 }
 
-/* Red dot inside selected circle */
-.noteTypeCard input:checked+.radioCircle::after {
-    content: "";
+.noteTypeCard input:checked + .radioCircle::after {
+    content: '';
     width: 10px;
     height: 10px;
     border-radius: 50%;
     background-color: #9E0A0A;
 }
 
-/* Keyboard focus */
 .noteTypeCard:has(input:focus-visible) {
     outline: 3px solid #9E0A0A;
     outline-offset: 3px;
 }
 
-.contentBox {
-    width: 85%;
-    height: 300px;
-
-    border: 2px solid #333;
-    border-radius: 15px;
-    background-color: white;
-
-    box-sizing: border-box;
-    margin: 20px auto;
-    transform: translateY(-50px);
-}
-
 .contentBox .description {
-    font-family: 'Lancelot', sans-serif;
-    font-size: 24px;
-    color: black;
     max-width: 900px;
-    transform: translateY(-20px);
     margin-left: 20px;
-}
-
-.contentBox .title {
-    font-family: 'RozhaOne', sans-serif;
-    font-size: 34px;
-    text-align: left;
-    margin-left: 20px;
-}
-
-.content {
-    display: block;
-    width: 97%;
-    height: 150px;
-    margin-left: 20px;
-    font-family: 'Lancelot', sans-serif;
-    font-size: 24px;
-    text-align: left;
-    padding-top: 10px;
-    padding-left: 10px;
-    border: 2px solid #333;
-    border-radius: 15px;
-    box-sizing: border-box;
-    resize: none;
     transform: translateY(-20px);
 }
 
@@ -722,28 +769,23 @@ td {
     align-items: center;
     justify-content: flex-end;
     gap: 20px;
-
-    width: 100%;
-    margin: 30px 0;
-    transform: translateX(-110px);
+    width: min(100% - 2 * var(--page-gutter), var(--content-width));
+    margin: 0 auto 30px;
+    transform: translateY(-40px);
 }
 
 .clearBtn,
 .saveBtn {
-    width: 200px;
+    width: clamp(120px, 18vw, 200px);
+    max-width: 100%;
     height: 55px;
-
-    font-family: 'Katibeth', sans-serif;
-    font-size: 30px;
-
     border: 2px solid #333;
     border-radius: 15px;
-
+    font-family: 'Katibeth', sans-serif;
+    font-size: 30px;
     cursor: pointer;
-    transform: translateY(-70px);
 }
 
-/* Clear button */
 .clearBtn {
     background-color: white;
     color: #333;
@@ -753,28 +795,26 @@ td {
     background-color: #F0F0F0;
 }
 
-/* Save button */
 .saveBtn {
+    border-color: #9E0A0A;
     background-color: #9E0A0A;
     color: white;
-    border-color: #9E0A0A;
 }
 
 .saveBtn:hover {
     background-color: #780707;
 }
 
-/*Note details */
-
-/* Full Note Detail Page */
-
+/* =========================================================
+   FULL NOTE DETAIL PAGE
+   ========================================================= */
 .noteDetailPage {
-    padding: 30px 55px 70px;
     min-height: 550px;
+    width: min(100%, 1450px);
+    margin: 0 auto;
+    padding: 30px var(--page-gutter) 70px;
     font-family: Georgia, serif;
 }
-
-/* Back, Edit and Delete */
 
 .detailActions {
     display: flex;
@@ -785,11 +825,11 @@ td {
 }
 
 .backToNotes {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #aaa;
     color: #333;
     font-size: 20px;
     text-decoration: none;
-    border-bottom: 1px solid #aaa;
-    padding-bottom: 5px;
 }
 
 .detailButtons {
@@ -799,11 +839,10 @@ td {
 
 .editNoteBtn,
 .deleteNoteBtn {
-    background: white;
+    padding: 10px 25px;
     border: 2px solid #333;
     border-radius: 12px;
-    padding: 10px 25px;
-
+    background-color: white;
     font-family: Georgia, serif;
     font-size: 20px;
     cursor: pointer;
@@ -815,12 +854,10 @@ td {
 }
 
 .deleteNoteBtn:hover {
-    background: #9E0A0A;
-    color: white;
     border-color: #9E0A0A;
+    background-color: #9E0A0A;
+    color: white;
 }
-
-/* Note heading */
 
 .detailHeading {
     display: flex;
@@ -837,8 +874,8 @@ td {
 .detailTitle {
     flex: 1;
     min-width: 0;
-    font-size: 32px;
     margin: 0;
+    font-size: 32px;
     overflow-wrap: anywhere;
 }
 
@@ -849,35 +886,33 @@ td {
 }
 
 .detailLine {
+    margin: 20px 0 25px;
     border: none;
     border-top: 1px solid #777;
-    margin: 20px 0 25px;
 }
-
-/* Two-column note content */
 
 .detailColumns {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 55px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(20px, 4vw, 55px);
 }
 
 .detailSection {
-    margin-bottom: 30px;
     min-width: 0;
+    margin-bottom: 30px;
 }
 
 .detailSection h2 {
-    font-size: 25px;
     margin: 0 0 8px;
+    font-size: 25px;
 }
 
 .detailSection p,
 .detailText {
+    margin: 0;
+    color: #444;
     font-size: 20px;
     line-height: 1.55;
-    color: #444;
-    margin: 0;
     overflow-wrap: anywhere;
 }
 
@@ -886,8 +921,6 @@ td {
     white-space: pre-wrap;
 }
 
-/* Tags */
-
 .detailTags {
     display: flex;
     flex-wrap: wrap;
@@ -895,37 +928,68 @@ td {
 }
 
 .detailTag {
+    padding: 7px 20px;
     border: 1px solid #999;
     border-radius: 30px;
-    padding: 7px 20px;
-
     font-size: 17px;
     overflow-wrap: anywhere;
 }
 
-/* Responsive layout */
+/* =========================================================
+   RESPONSIVE LAYOUTS — deliberate changes at narrower widths
+   ========================================================= */
+@media (max-width: 1120px) {
+    .notesHeader { flex-wrap: wrap; justify-content: center; }
+    .noteTitle { flex: 1 0 100%; }
+    .searchBox { max-width: 480px; }
+}
 
-@media (max-width: 750px) {
-    .noteDetailPage {
-        padding: 25px 20px;
-    }
+@media (max-width: 850px) {
+    .notesCards { grid-template-columns: 1fr; }
+    .dateCate { flex-wrap: wrap; }
+    .dateBox { flex: 1 1 250px; }
+    .noteTypeOptions { flex-wrap: wrap; }
+    .noteTypeCard { flex: 1 1 220px; }
+    .optionBox:has(.noteTypeOptions) { height: auto; padding-bottom: 20px; }
+    .notesBox { max-width: 650px; width: 100%; margin-inline: auto; }
+    .detailColumns { grid-template-columns: 1fr; }
+}
 
-    .detailColumns {
-        grid-template-columns: 1fr;
-        gap: 15px;
+@media (max-width: 600px) {
+    .title { line-height: 1.05; }
+    .subtitle { line-height: 1.15; }
+    .linked, .linkedPage { overflow-wrap: anywhere; line-height: 1; }
+    .notesHeader { padding-inline: var(--page-gutter); }
+    .noteTitle { white-space: normal; }
+    .searchBox { flex: 1 1 100%; max-width: none; }
+    .newNoteBox { width: auto; padding-inline: 14px; }
+    .filterToggle { padding-inline: 14px; }
+    .notesFilters { width: calc(100% - 2 * var(--page-gutter)); padding: 16px; }
+    .filterGroup { flex: 1 1 100%; max-width: none; }
+    .clearFilters { width: 100%; }
+    .featuredNotes { grid-template-columns: 32px minmax(0, 1fr) 32px; }
+    .carouselArrow { width: 32px; height: 55px; font-size: 16px; }
+    .notesCards { padding-inline: 8px; }
+    .noteInfo { flex-wrap: wrap; gap: 4px 12px; }
+    .optionBox, .contentBox { height: auto; min-height: 0; padding-block: 10px 20px; }
+    .optionBox .title, .contentBox .title, .dateBox .title { margin: 10px 14px; }
+    .example, .content, .dateInput, .categoryInput {
+        width: calc(100% - 28px);
+        margin-left: 14px;
+        font-size: 20px;
     }
-
-    .detailHeading {
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    .detailTitle {
-        flex-basis: 100%;
-        order: -1;
-    }
-
-    .detailActions {
-        flex-wrap: wrap;
-    }
+    .content { height: 180px; transform: none; }
+    .contentBox .description { margin: 8px 14px; transform: none; }
+    .noteTypeOptions { padding: 0 14px 12px; }
+    .dateCate { gap: 14px; }
+    .dateBox { min-height: 135px; }
+    .formActions { flex-wrap: wrap; gap: 10px; }
+    .clearBtn, .saveBtn { flex: 1 1 130px; width: auto; }
+    .detailActions { flex-wrap: wrap; }
+    .detailHeading { flex-wrap: wrap; gap: 12px; }
+    .detailTitle { order: -1; flex-basis: 100%; }
+    .detailButtons { flex-wrap: wrap; gap: 10px; }
+    .detailDate { white-space: normal; }
+    .home-image { transform: none; }
+    .greeting1, .greeting2 { padding-left: 0; }
 }

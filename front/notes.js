@@ -1,6 +1,7 @@
 
 const noteForm = document.getElementById("noteForm");
 
+// Check whether we're editing an existing note
 const params = new URLSearchParams(window.location.search);
 const editingId = params.get("id");
 
@@ -12,7 +13,7 @@ const editingNote = savedNotes.find(
     note => note.id === editingId
 );
 
-// If an existing note is being edited, fill in the form
+// Fill the form if we're editing
 if (editingId && editingNote) {
 
     document.querySelector('[name="NoteTitle"]').value =
@@ -45,15 +46,15 @@ if (editingId && editingNote) {
         typeRadio.checked = true;
     }
 
-    // Change the Save button text
     document.querySelector(".saveBtn").textContent =
         "SAVE CHANGES";
 }
 
-noteForm.addEventListener("submit", function (event) {
+// Handle saving a note
+noteForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    // Step 1: Collect form data
+    // Collect form data
     const title = document.querySelector('[name="NoteTitle"]').value;
     const date = document.querySelector('[name="dateTakeNote"]').value;
     const type = document.querySelector('input[name="type"]:checked').value;
@@ -63,30 +64,14 @@ noteForm.addEventListener("submit", function (event) {
     const reflection = document.querySelector('[name="NoteReflection"]').value;
     const tags = document.querySelector('[name="NoteTags"]').value;
 
-    // Step 2: Create a new note
-    const note = {
-        id: crypto.randomUUID(),
-        title: title,
-        date: date,
-        type: type,
-        category: category,
-        source: source,
-        content: content,
-        reflection: reflection,
-        tags: tags,
-        createdAt: new Date().toISOString()
-    };
-
-    // Step 3: Retrieve existing notes
-    
-    // Retrieve the latest saved notes
+    // Retrieve the latest notes
     const notes = JSON.parse(
         localStorage.getItem("myNotes") || "[]"
     );
 
     if (editingId) {
 
-        // Find the existing note
+        // Find the note being edited
         const index = notes.findIndex(
             note => note.id === editingId
         );
@@ -112,7 +97,7 @@ noteForm.addEventListener("submit", function (event) {
 
     } else {
 
-        // Create a completely new note
+        // Create a new note
         const note = {
             id: crypto.randomUUID(),
             title: title,
@@ -129,7 +114,7 @@ noteForm.addEventListener("submit", function (event) {
         notes.push(note);
     }
 
-    // Save the updated array
+    // Save the updated notes
     localStorage.setItem(
         "myNotes",
         JSON.stringify(notes)

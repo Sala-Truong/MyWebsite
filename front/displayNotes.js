@@ -7,6 +7,43 @@ const nextButton = document.getElementById("nextNotes");
 const notes = JSON.parse(
     localStorage.getItem("myNotes") || "[]"
 ).reverse();
+let filteredNotes = [...notes];
+const searchForm = document.getElementById("searchForm");
+const searchInput = document.getElementById("site-search");
+const filterToggle = document.getElementById("toggleFilters");
+const filtersBox = document.getElementById("notesFilters");
+
+filterToggle.addEventListener("click", function() {
+    const isOpening = filtersBox.hidden;
+
+    // Show or hide the filter box
+    filtersBox.hidden = !isOpening;
+
+    // Update button accessibility
+    filterToggle.setAttribute(
+        "aria-expanded",
+        String(isOpening)
+    );
+});
+// Search through all saved notes
+function searchNotes(query) {
+    const searchTerm = query.trim().toLowerCase();
+
+    return notes.filter(function(note) {
+
+        const searchableText = [
+            note.title,
+            note.type,
+            note.category,
+            note.source,
+            note.content,
+            note.reflection,
+            note.tags
+        ].join(" ").toLowerCase();
+
+        return searchableText.includes(searchTerm);
+    });
+}
 
 const notesPerPage = 3;
 let currentPage = 0;
@@ -116,31 +153,54 @@ card.appendChild(moreLink);
 }
 
 // Display three notes for the current page
+
 function displayNotes() {
     notesContainer.replaceChildren();
 
     const start = currentPage * notesPerPage;
     const end = start + notesPerPage;
 
-    const visibleNotes = notes.slice(start, end);
+    // Display notes from the filtered array
+    const visibleNotes = filteredNotes.slice(start, end);
 
     visibleNotes.forEach(function(note, index) {
-        const card = createNoteCard(note, start + index);
+        const originalIndex = notes.findIndex(
+            item => item.id === note.id
+        );
+
+        const card = createNoteCard(note, originalIndex);
         notesContainer.appendChild(card);
     });
 
+    // No notes have been created yet
     if (notes.length === 0) {
         notesContainer.appendChild(
-            createText("p", "emptyNotes", "No notes yet. Create your first note!")
+            createText(
+                "p",
+                "emptyNotes",
+                "No notes yet. Create your first note!"
+            )
         );
     }
 
-    // Enable or disable navigation arrows
+    // Notes exist, but none match the search
+    else if (filteredNotes.length === 0) {
+        notesContainer.appendChild(
+            createText(
+                "p",
+                "emptyNotes",
+                "No matching notes found. Try another keyword."
+            )
+        );
+    }
+
+    // Update carousel arrows
     prevButton.disabled = currentPage === 0;
-    nextButton.disabled = end >= notes.length;
+    nextButton.disabled = end >= filteredNotes.length;
 }
 
 // Navigate to newer notes
+// Previous three notes
 prevButton.addEventListener("click", function() {
     if (currentPage > 0) {
         currentPage--;
@@ -148,13 +208,27 @@ prevButton.addEventListener("click", function() {
     }
 });
 
-// Navigate to older notes
+// Next three matching notes
 nextButton.addEventListener("click", function() {
-    if ((currentPage + 1) * notesPerPage < notes.length) {
+    if ((currentPage + 1) * notesPerPage < filteredNotes.length) {
         currentPage++;
         displayNotes();
     }
 });
 
+searchForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const query = searchInput.value;
+
+    // Update the filtered notes
+    filteredNotes = searchNotes(query);
+
+    // Return to the first page of search results
+    currentPage = 0;
+
+    // Display the matching note cards
+    displayNotes();
+});
 // Display notes when the page opens
 displayNotes();

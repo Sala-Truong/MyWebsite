@@ -1,77 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <table class="table1" style="width:100%">
         <tr>
-            <td style="width:15%" class="linked"><a href="https://github.com/Sala-Truong"> GitHub </a></td>
-            <td>
-                <h1 class="title"> SALA TRUONG </h1>
-                <h2 class="subtitle"> Programmer Computer Science Student </h2>
+            <td style="width:15%" class="linked">
+                <a href="https://github.com/Sala-Truong">
+                    GitHub
+                </a>
             </td>
-            <td style="width:15%" class="linked"><a href="https://www.linkedin.com/in/sala-truong-726378428/"> LinkedIn
-                </a></td>
+
+            <td>
+                <h1 class="title">SALA TRUONG</h1>
+                <h2 class="subtitle">
+                    Programmer Computer Science Student
+                </h2>
+            </td>
+
+            <td style="width:15%" class="linked">
+                <a href="https://www.linkedin.com/in/sala-truong-726378428/">
+                    LinkedIn
+                </a>
+            </td>
         </tr>
     </table>
     <table class="table2" style="width:100%">
         <tr>
-            <td style="width:20%" class="linkedPage"><a href="notes.html"> NOTES </a></td>
-            <td style="width:20%" class="linkedPage"><a href="projects.html"> PROJECTS </a></td>
-            <td style="width:20%" class="linkedPage"> HOME </td>
-            <td style="width:20%" class="linkedPage"><a href="activities.html"> ACTIVITIES </a></td>
-            <td style="width:20%" class="linkedPage"><a href="resume.html"> RESUME </a></td>
-        </tr>
-    </table>
-    <table style="width: 100%;" class="table2">
-        <tr>
-            <td>
-                <div class="notesHeader">
-                    <h1 class="noteTitle">FEATURED NOTES</h1>
-                    <form action="/search" method="GET" role="search" class="searchBox">
-                        <input type="search" id="site-search" name="q" placeholder="Search">
-                        <button type="submit">
-                            <img src="images/search.avif" class="searchIcon" alt="Search">
-                        </button>
-                    </form>
-                    <a href="newNotes.html" class="newNoteBox">
-                            <span class="newNotes"> + NEW NOTE </span>
-                    </a>
-                </div>
-                <div class="featuredNotes">
-
-    <button
-        type="button"
-        class="carouselArrow prevArrow"
-        id="prevNotes"
-        aria-label="Previous notes"
-    >
-        &#9664;
-    </button>
-
-    <div class="notesCards" id="notesContainer">
-        <!-- JavaScript will generate your saved note cards here -->
-    </div>
-
-    <button
-        type="button"
-        class="carouselArrow nextArrow"
-        id="nextNotes"
-        aria-label="Next notes"
-    >
-        &#9654;
-    </button>
-
-</div>
+            <td style="width:20%" class="linkedPage">
+                <a href="notes.html">NOTES</a>
+            </td>
+            <td style="width:20%" class="linkedPage">
+                <a href="projects.html">PROJECTS</a>
+            </td>
+            <td style="width:20%" class="linkedPage">
+                HOME
+            </td>
+            <td style="width:20%" class="linkedPage">
+                <a href="activities.html">ACTIVITIES</a>
+            </td>
+            <td style="width:20%" class="linkedPage">
+                <a href="resume.html">RESUME</a>
             </td>
         </tr>
     </table>
+    <table class="table2" style="width:100%">
+        <tr>
+            <td>
+                <div class="notesHeader">
+                    <!-- Page title -->
+                    <h1 class="noteTitle">
+                        FEATURED NOTES
+                    </h1>
+                    <!-- Search bar -->
+                    <form id="searchForm" role="search" class="searchBox">
+                        <input type="search" id="site-search" name="q" placeholder="Search notes..."
+                            aria-label="Search notes">
+
+                        <button type="submit" aria-label="Search">
+                            <img src="images/search.avif" class="searchIcon" alt="">
+                        </button>
+                    </form>
+                    <!-- Filter toggle button -->
+                    <div class="filterToolbar">
+                        <button type="button" id="toggleFilters" class="filterToggle" aria-expanded="false"
+                            aria-controls="notesFilters">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 7h16M7 12h10M10 17h4" />
+                            </svg>
+                            <span>FILTER</span>
+                        </button>
+                    </div>
+                    <!-- Create new note -->
+                    <a href="newNotes.html" class="newNoteBox">
+                        <span class="newNotes">
+                            + NEW NOTE
+                        </span>
+                    </a>
+                </div>
+                <div class="notesFilters" id="notesFilters" hidden>
+                    <!-- Note type -->
+                    <div class="filterGroup">
+                        <label for="typeFilter">
+                            NOTE TYPE
+                        </label>
+                        <select id="typeFilter">
+                            <option value="all">
+                                All Types
+                            </option>
+                            <option value="Study">
+                                Study Notes
+                            </option>
+                            <option value="Reading">
+                                Reading Notes
+                            </option>
+                            <option value="Other">
+                                Other Notes
+                            </option>
+                        </select>
+                    </div>
+                    <!-- Note category -->
+                    <div class="filterGroup">
+                        <label for="categoryFilter">
+                            CATEGORY
+                        </label>
+                        <select id="categoryFilter">
+                            <option value="all">
+                                All Categories
+                            </option>
+                            <option value="study">
+                                Study Notes
+                            </option>
+                            <option value="reading">
+                                Reading Notes
+                            </option>
+                            <option value="technical">
+                                Technical Notes
+                            </option>
+                            <option value="project">
+                                Project Notes
+                            </option>
+                            <option value="ideas">
+                                Ideas & Inspiration
+                            </option>
+                            <option value="personal">
+                                Personal Notes
+                            </option>
+                        </select>
+                    </div>
+                    <!-- Clear filters -->
+                    <button type="button" id="clearFilters" class="clearFilters">
+                        CLEAR FILTERS
+                    </button>
+                </div>
+                <div class="featuredNotes">
+                    <!-- Previous notes -->
+                    <button type="button" class="carouselArrow prevArrow" id="prevNotes" aria-label="Previous notes">
+                        &#9664;
+                    </button>
+                    <!-- Notes generated by JavaScript -->
+                    <div class="notesCards" id="notesContainer">
+                        <!-- Saved note cards appear here -->
+                    </div>
+                    <!-- Next notes -->
+                    <button type="button" class="carouselArrow nextArrow" id="nextNotes" aria-label="Next notes">
+                        &#9654;
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script src="displayNotes.js"></script>
 </body>
-<script src="displayNotes.js"></script>
+
 </html>
