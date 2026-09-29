@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Details</title>
+</head>
+
+<body>
+    <table class="table1" style="width:100%">
+        <tr>
+            <td style="width:15%" class="linked"><a href="https://github.com/Sala-Truong"> GitHub </a></td>
+            <td>
+                <h1 class="title"> SALA TRUONG </h1>
+                <h2 class="subtitle"> Programmer Computer Science Student </h2>
+            </td>
+            <td style="width:15%" class="linked">
+                <a href="https://www.linkedin.com/in/sala-truong-726378428/"> LinkedIn</a>
+            </td>
+        </tr>
+    </table>
+    <table class="table2" style="width:100%">
+        <tr>
+            <td style="width:20%" class="linkedPage"><a href="notes.html"> NOTES </a></td>
+            <td style="width:20%" class="linkedPage"><a href="projects.html"> PROJECTS </a></td>
+            <td style="width:20%" class="linkedPage"> HOME </td>
+            <td style="width:20%" class="linkedPage"><a href="activities.html"> ACTIVITIES </a></td>
+            <td style="width:20%" class="linkedPage"><a href="resume.html"> RESUME </a></td>
+        </tr>
+    </table>
+    <table style="width: 100%;" class="table2">
+        <tr>
+            <td>
+
+                <main class="noteDetailPage">
+                    <!-- Top actions -->
+                    <div class="detailActions">
+                        <a href="notes.html" class="backToNotes">
+                            ← Back to Notes
+                        </a>
+                        <div class="detailButtons">
+                            <button type="button" id="editNoteBtn" class="editNoteBtn">
+                                ✎ Edit
+                            </button>
+                            <button type="button" id="deleteNoteBtn" class="deleteNoteBtn">
+                                ♧ Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Note title and date -->
+                    <div class="detailHeading">
+                        <span id="detailNumber" class="detailNumber"></span>
+
+                        <h1 id="detailTitle" class="detailTitle"></h1>
+
+                        <span id="detailDate" class="detailDate"></span>
+                    </div>
+
+                    <hr class="detailLine">
+
+                    <!-- Full note information -->
+                    <div class="detailColumns">
+
+                        <!-- Left column -->
+                        <div class="detailLeft">
+
+                            <section class="detailSection">
+                                <h2>Source / Reference</h2>
+                                <p id="detailSource"></p>
+                            </section>
+
+                            <section class="detailSection">
+                                <h2>Content</h2>
+                                <div id="detailContent" class="detailText"></div>
+                            </section>
+
+                        </div>
+
+                        <!-- Right column -->
+                        <div class="detailRight">
+
+                            <section class="detailSection">
+                                <h2>Reflection</h2>
+                                <div id="detailReflection" class="detailText"></div>
+                            </section>
+
+                            <section class="detailSection">
+                                <h2>Tags</h2>
+                                <div id="detailTags" class="detailTags"></div>
+                            </section>
+                        </div>
+                    </div>
+                </main>
+            </td>
+        </tr>
+    </table>
+</body>
+<script src="displayNoteDetail.js"></script>
+
+</html>

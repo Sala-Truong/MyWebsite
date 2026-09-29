@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Note</title>
+</head>
+
+<body>
+    <table class="table1" style="width:100%">
+        <tr>
+            <td style="width:15%" class="linked"><a href="https://github.com/Sala-Truong"> GitHub </a></td>
+            <td>
+                <h1 class="title"> SALA TRUONG </h1>
+                <h2 class="subtitle"> Programmer Computer Science Student </h2>
+            </td>
+            <td style="width:15%" class="linked">
+                <a href="https://www.linkedin.com/in/sala-truong-726378428/"> LinkedIn</a>
+            </td>
+        </tr>
+    </table>
+    <table class="table2" style="width:100%">
+        <tr>
+            <td style="width:20%" class="linkedPage"><a href="notes.html"> NOTES </a></td>
+            <td style="width:20%" class="linkedPage"><a href="projects.html"> PROJECTS </a></td>
+            <td style="width:20%" class="linkedPage"> HOME </td>
+            <td style="width:20%" class="linkedPage"><a href="activities.html"> ACTIVITIES </a></td>
+            <td style="width:20%" class="linkedPage"><a href="resume.html"> RESUME </a></td>
+        </tr>
+    </table>
+    <table style="width: 100%;" class="table2">
+        <tr>
+            <td>
+                <h1 class="newNoteTitle">CREATE A NOTE
+                    <hr class="underline">
+                </h1>
+                <h2 class="introduction"> A little space for everything I've learned</h2>
+                <form id="noteForm">
+                    <div class="optionBox">
+                        <h1 class="title">NOTE TYPE <span class="important">* </span></h1>
+                        <div class="noteTypeOptions">
+
+                            <label class="noteTypeCard">
+                                <input type="radio" name="type" value="Study" required>
+                                <span class="radioCircle"></span>
+                                <span class="noteTypeText">Study Note</span>
+                            </label>
+
+                            <label class="noteTypeCard">
+                                <input type="radio" name="type" value="Reading">
+                                <span class="radioCircle"></span>
+                                <span class="noteTypeText">Reading Note</span>
+                            </label>
+
+                            <label class="noteTypeCard">
+                                <input type="radio" name="type" value="Other">
+                                <span class="radioCircle"></span>
+                                <span class="noteTypeText">Other Note</span>
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="optionBox">
+                        <h1 class="title"> TITLE <span class="important">* </span></h1>
+                        <textarea name="NoteTitle" class="example"
+                            placeholder="e.g. Understanding Dynamic Programming" required></textarea>
+                    </div>
+                    <div class="dateCate">
+                        <div class="dateBox">
+                            <h1 class="title">
+                                DATE <span class="important">*</span>
+                            </h1>
+                            <input type="date" name="dateTakeNote" class="dateInput" required>
+                        </div>
+                        <div class="dateBox">
+                            <h1 class="title"> CATEGORY <span class="important">* </span></h1>
+                            <select name="noteCategory" class="categoryInput" required>
+                                <option value="none" disabled selected>
+                                    Select a category
+                                </option>
+                                <option value="study">Study Notes</option>
+                                <option value="reading">Reading Notes</option>
+                                <option value="technical">Technical Notes</option>
+                                <option value="project">Project Notes</option>
+                                <option value="ideas">Ideas & Inspiration</option>
+                                <option value="personal">Personal Notes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="optionBox">
+                        <h1 class="title"> SOURCE/ REFERENCE</h1>
+                        <textarea name="NoteSource" class="example"
+                            placeholder="Book, lecture, article, video or URL"></textarea>
+                    </div>
+                    <hr class="line">
+                    <div class="contentBox">
+                        <h1 class="title"> CONTENT <span class="important">* </span></h1>
+                        <p class="description"> What did I learn? (Key ideas, definitions, examples, diagrams...)</p>
+                        <textarea name="NoteContent" class="content" placeholder="Write your notes here..." required></textarea>
+                    </div>
+                    <div class="contentBox">
+                        <h1 class="title"> REFLECTION <span class="important">* </span></h1>
+                        <p class="description"> What do I think about what I've learned? (Understanding, questions,
+                            observations, what to explore next...)</p>
+                        <textarea name="NoteReflection" class="content"
+                            placeholder="Write your reflection here..." required></textarea>
+                    </div>
+                    <div class="optionBox">
+                        <h1 class="title"> TAGS</h1>
+                        <textarea name="NoteTags" class="example"
+                            placeholder="e.g. #algorithm #java #reading"></textarea>
+                    </div>
+                    <hr class="line">
+                    <div class="formActions">
+                        <button type="reset" class="clearBtn">
+                            CLEAR
+                        </button>
+                        <button type="submit" class="saveBtn">
+                            SAVE NOTE
+                        </button>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+<script src="notes.js"></script>
+
+</html>
